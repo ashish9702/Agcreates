@@ -1,0 +1,19 @@
+.custom-navbar {
+  background-color: #000; // Black background
+}
+
+.nav-link {
+  color: #fff !important;
+  font-weight: 500;
+  margin-left: 12px;
+  transition: 0.2s;
+
+  &:hover {
+    color: #ff8800 !important; // Orange hover
+  }
+}
+
+.nav-item.active .nav-link {
+  color: #ff8800 !important;  // Orange active item
+  font-weight: 600;
+}

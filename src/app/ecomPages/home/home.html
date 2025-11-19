@@ -1,0 +1,89 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-light shadow-sm sticky-top px-4">
+  <a class="navbar-brand fw-bold fs-3 text-danger" href="#">AG Creates</a>
+  <form class="d-flex ms-auto me-3 w-50" role="search">
+    <input class="form-control" type="search" placeholder="Search by brand or model">
+  </form>
+  <div class="d-flex align-items-center">
+    <i class="bi bi-person fs-5 me-3"></i>
+    <i class="bi bi-cart fs-5"></i>
+  </div>
+</nav>
+
+<!-- Banner -->
+<div class="hero-banner text-center text-white d-flex align-items-center justify-content-center"
+     style="height: 60vh; background: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1500&q=80') center/cover;">
+  <div>
+    <h1 class="display-5 fw-bold">SUMMER SALE</h1>
+    <p class="lead">Shop events at up to 80% off</p>
+    <button class="btn btn-danger px-4">SHOP NOW</button>
+  </div>
+</div>
+
+<!-- Featured Products -->
+<div class="container py-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="fw-bold">Featured Daily Deals</h3>
+    <button class="btn btn-outline-dark btn-sm">SHOP ALL DEALS</button>
+  </div>
+
+  <div *ngIf="loading" class="text-center py-5">
+    <div class="spinner-border text-primary"></div>
+  </div>
+
+  <div class="row g-4" *ngIf="!loading">
+    <div class="col-md-3" *ngFor="let product of products">
+      <div class="card h-100 shadow-sm">
+        <img [src]="product.image" class="card-img-top p-3" [alt]="product.title"
+             style="height:220px;object-fit:contain">
+        <div class="card-body d-flex flex-column">
+          <h6 class="card-title">{{ product.title | slice:0:50 }}{{ product.title.length>50?'…':'' }}</h6>
+          <p class="fw-bold text-success">$ {{ product.price }}</p>
+          <button class="btn btn-primary mt-auto w-100" (click)="addtocart(product.id)">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 🛒 Cart Management Section -->
+<div class="container py-5 border-top">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="fw-bold">🛒 Cart Management</h3>
+    <div>
+      <button class="btn btn-dark btn-sm me-2" (click)="getAllCarts()">Get All Carts</button>
+      <button class="btn btn-success btn-sm me-2" (click)="addCart()">Add New Cart</button>
+      <button class="btn btn-warning btn-sm me-2" (click)="updateCart()">Update Cart (ID 1)</button>
+      <button class="btn btn-danger btn-sm" (click)="deleteCart(1)">Delete Cart (ID 1)</button>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="text-center py-4">
+    <div class="spinner-border text-primary"></div>
+  </div>
+
+  <div *ngIf="!loading && carts && carts.length > 0">
+    <div class="card mb-3 shadow-sm" *ngFor="let cart of carts">
+      <div class="card-body">
+        <h6 class="fw-bold">Cart ID: {{ cart.id }}</h6>
+        <p>User ID: {{ cart.userId }}</p>
+        <p>Date: {{ cart.date | date }}</p>
+        <ul class="list-unstyled">
+          <li *ngFor="let p of cart.products">
+            <span class="text-muted">Product ID:</span> {{ p.productId }} |
+            <span class="text-muted">Quantity:</span> {{ p.quantity }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && carts && carts.length === 0" class="text-center text-muted py-4">
+    No carts found.
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-light text-center py-3 border-top">
+  <small class="text-muted">© 2025 AG Creates. All rights reserved.</small>
+</footer>

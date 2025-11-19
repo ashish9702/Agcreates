@@ -1,0 +1,29 @@
+.hero-banner {
+  background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') center/cover no-repeat;
+  height: 350px;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.category-card img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border: 3px solid #eee;
+  transition: 0.3s;
+}
+.category-card img:hover {
+  transform: scale(1.1);
+}
+
+.brand-strip span {
+  cursor: pointer;
+  transition: color .2s;
+}
+.brand-strip span:hover {
+  color: #d32f2f;
+}
+.card:hover {
+  transform: translateY(-5px);
+  transition: 0.2s ease;
+}
